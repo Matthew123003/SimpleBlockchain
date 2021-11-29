@@ -48,7 +48,9 @@ public class Block {
     }
 
     public void corruptData(String newCorruptData) {
+        System.err.println("Alert!: corrupting a Block instance");
         this.data = newCorruptData;
+        System.err.println(this);
     }
 
     @Override
