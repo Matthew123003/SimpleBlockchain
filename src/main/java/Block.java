@@ -21,7 +21,7 @@ public class Block {
         this.data = data;
         this.hash = this.calculateHash();
         this.previousHash = previousHash;
-        this.timeStamp = fakeDate ? new Date() : new Date(1);
+        this.timeStamp = !fakeDate ? new Date() : new Date(1);
         this.proofOfWork = 0;
     }
 
