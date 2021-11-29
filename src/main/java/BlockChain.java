@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
-class Blockchain<T> extends ArrayList<Block>{
-    // ArrayList<Block> chain = new ArrayList<Block>();
+// subclassing ArrayList here.
+final class Blockchain<T> extends ArrayList<Block>{
 
     Blockchain() {
       Block genesisBlock = new Block("0", "{\"GenesisBlock\": \"true\"}");
@@ -18,13 +18,16 @@ class Blockchain<T> extends ArrayList<Block>{
     }
   
     public boolean isValid() {
-      for (int i = 1; i < this.size(); i++) {
-        Block currentBlock = this.get(i);
-        Block previousBlock = this.get(i - 1);
-        if (currentBlock.getHash() != currentBlock.calculateHash()) return false;
-        if (currentBlock.getPreviousHash() != previousBlock.getHash()) return false;
-      }
-      return true;
+        if (this.size() == 1) {
+            return true;
+        }
+        for (int i = 1; i < this.size(); i++) {
+            Block currentBlock = this.get(i);
+            Block previousBlock = this.get(i - 1);
+            if (currentBlock.getHash() != currentBlock.calculateHash()) return false;
+            if (currentBlock.getPreviousHash() != previousBlock.getHash()) return false;
+        }
+        return true;
     }
 
     @Override

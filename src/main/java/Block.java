@@ -1,5 +1,9 @@
 import java.util.Date;
 
+// unit testing this class requires that you "wire" the date assigned to the Block.
+// otherwise you have no way of ensuring what the hash will be.
+// So we have two constructors, one for use and one for testing. the normal one calls the testing one.
+
 public class Block {
     private String data = ""; // JSON string of a transaction
     private String hash = null;
@@ -8,10 +12,16 @@ public class Block {
     private Integer proofOfWork = 0;
 
     Block(String previousHash, String data) {
+        this(previousHash, data, false);
+    }
+
+    // the fakeDate, if true becomes "new Date(1)" 1 millisecond after "the UNIX epoch", namely January 1, 1970 at midnight plus 1ms;
+    // this is here for unit testing. notice "protected" class.
+    protected Block(String previousHash, String data, Boolean fakeDate) {
         this.data = data;
         this.hash = this.calculateHash();
         this.previousHash = previousHash;
-        this.timeStamp = new Date();
+        this.timeStamp = fakeDate ? new Date() : new Date(1);
         this.proofOfWork = 0;
     }
 
