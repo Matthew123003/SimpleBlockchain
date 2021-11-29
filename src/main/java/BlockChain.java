@@ -24,10 +24,20 @@ final class Blockchain<T> extends ArrayList<Block>{
         for (int i = 1; i < this.size(); i++) {
             Block currentBlock = this.get(i);
             Block previousBlock = this.get(i - 1);
-            if (currentBlock.getHash() != currentBlock.calculateHash()) return false;
-            if (currentBlock.getPreviousHash() != previousBlock.getHash()) return false;
+            if (!currentBlock.getHash().equals(currentBlock.calculateHash())) {
+                this.printHashes(currentBlock.getHash(), currentBlock.calculateHash());
+                return false;
+            }
+            if (!currentBlock.getPreviousHash().equals(previousBlock.getHash())) {
+                this.printHashes(currentBlock.getPreviousHash(), previousBlock.getHash());
+                return false;
+            };
         }
         return true;
+    }
+
+    private void printHashes(String a, String b) {
+        System.out.printf("Debug Hashes: \n\t%s\n\t%s\n", a, b);
     }
 
     @Override

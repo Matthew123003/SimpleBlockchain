@@ -47,6 +47,10 @@ public class Block {
         return this.previousHash;
     }
 
+    public void corruptData(String newCorruptData) {
+        this.data = newCorruptData;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
