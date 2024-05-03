@@ -39,7 +39,7 @@ public class ShaUtils {
         }
     
         public static void main(String[] args) {
-    
+            //Passing all tests
             //String algorithm = "SHA3-256"; // if you prefer SHA-3
             String algorithm = "SHA-256";
     
